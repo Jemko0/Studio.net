@@ -11,12 +11,17 @@ namespace StudioDotNet
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        public static FormManager formManager = new FormManager();
+
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StudioForm());
+            formManager.CreateMainForm();
+            Application.Run(formManager);
+            
         }
     }
 }
