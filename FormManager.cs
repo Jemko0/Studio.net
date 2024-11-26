@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudioDotNet
@@ -16,6 +13,11 @@ namespace StudioDotNet
             {
                 ExitThread();
             }
+
+            if (sender.Equals(GetForm("studio")))
+            {
+                ExitThread();
+            }
         }
 
         public Dictionary<string, Form> openForms = new Dictionary<string, Form>();
@@ -26,11 +28,36 @@ namespace StudioDotNet
             mainForm.Show();
         }
 
+        public Form GetForm(string id)
+        {
+            return openForms[id];
+        }
+
+        public T GetForm<T>(string id) where T : Form, new()
+        {
+            return openForms[id] as T;
+        }
+
+        /// <summary>
+        /// Creates a Form (does not display it to the user)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="k"></param>
+        /// <returns>Created Form, if Form already exists, finds the Form and returns it</returns>
         public T CreateForm<T>(string k) where T : Form, new()
         {
-            var ret = new T();
-            openForms.Add(k, ret);
-            ret.FormClosed += OnFormClosed;
+            T ret = new T();
+
+            if (!openForms.ContainsValue(ret) && !openForms.ContainsKey(k))
+            {
+                openForms.Add(k, ret);
+                ret.FormClosed += OnFormClosed;
+                return ret;
+            }
+
+            ret = GetForm<T>(k);
+            ret.BringToFront();
+            ret.Focus();
             return ret;
         }
     }

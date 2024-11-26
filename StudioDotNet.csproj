@@ -97,5 +97,11 @@
   <ItemGroup>
     <None Include="Resources\BG.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StdBG.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StdBGTransparent.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
