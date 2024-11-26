@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using static StudioDotNet.Internal.DataStructures;
+using static StudioDotNet.Internal.DataStructures.TimelineData;
 
 namespace StudioDotNet.Forms
 {
@@ -12,31 +13,83 @@ namespace StudioDotNet.Forms
             InitializeComponent();
         }
 
+        private IVector2 zoom = new IVector2(16, 48);
+        private IVector2 timelinePos = new IVector2(0, 0);
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            StudioForm s = Program.formManager.GetForm("studio") as StudioForm;
-            IVector2 Zoom = s.GetZoom();
+            Image image = new Bitmap(Resources.BG, new Size(32 * zoom.x / 16, 32 * zoom.y / 16));
 
-            Image image = new Bitmap(Resources.BG, new Size(32 * Zoom.x / 16, 32 * Zoom.y / 16));
-            TextureBrush tBrush = new TextureBrush(image);
-            Pen blackPen = new Pen(Color.Black);
-            e.Graphics.FillRectangle(tBrush, new Rectangle(0, 0, StudioForm.ActiveForm.Width, StudioForm.ActiveForm.Height));
+            SolidBrush b_brush = new SolidBrush(UIColors.GetColorByKey("backgrounds"));
+            SolidBrush l_brush = new SolidBrush(UIColors.GetColorByKey("tl_lines"));
+
+            //background
+            e.Graphics.FillRectangle(b_brush, new Rectangle(0, 0, ActiveForm.Width, ActiveForm.Height));
+
+            //lines
+            for(int x = 0; x < pictureBox1.Width; x++)
+            {
+                T_TimeSignature timeSig = Program.formManager.GetForm<StudioForm>("studioform").mainTracker.timeSignature;
+
+                int lThickness = x % timeSig.numerator == 0 ? 2 : 1;
+                e.Graphics.FillRectangle(l_brush, new Rectangle((x * zoom.x) - timelinePos.x , 0, lThickness, pictureBox1.Height));
+            }
+
+            for(int y = 0; y < pictureBox1.Height; y++)
+            {
+                e.Graphics.FillRectangle(l_brush, new Rectangle(0, (y * zoom.y) - timelinePos.y, pictureBox1.Width, 2));
+            }
         }
 
-        private void FileDropdown_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void Timeline_KeyDown(object sender, KeyEventArgs e)
         {
-;            System.Diagnostics.Debug.WriteLine(e.ClickedItem.Text);
-            switch (e.ClickedItem.Text)
-            {
-                case "Open":
-                    return;
+            if (e.KeyCode == Keys.Right)
+                timelinePos.x += 1;
 
-                case "Quit":
-                    StudioForm s = Program.formManager.GetForm<StudioForm>("studio");
-                    s.CheckUnsaved();
-                    Program.formManager.ExitThread();
-                    return;
+            if (e.KeyCode == Keys.Left)
+                timelinePos.x -= 1;
+
+            if (e.KeyCode == Keys.Up)
+                timelinePos.y += 1;
+
+            if (e.KeyCode == Keys.Down)
+                timelinePos.y -= 1;
+
+            if (e.KeyCode == Keys.Add)
+            {
+                if (Control.ModifierKeys == Keys.Alt)
+                {
+                    zoom.y += 1;
+                }
+                else
+                {
+                    zoom.x += 1;
+                }
             }
+
+            if (e.KeyCode == Keys.Subtract)
+            {
+                if (Control.ModifierKeys == Keys.Alt)
+                {
+                    zoom.y -= 1;
+                }
+                else
+                {
+                    zoom.x -= 1;
+                }
+            }
+
+            int minZoomXY = 10;
+
+            if(zoom.x < minZoomXY)
+            {
+                zoom.x = minZoomXY;
+            }
+            if (zoom.y < minZoomXY)
+            {
+                zoom.y = minZoomXY;
+            }
+
+            pictureBox1.Invalidate();
         }
     }
 }

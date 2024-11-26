@@ -127,4 +127,10 @@
   <data name="StdBGTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StdBGTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TTools_BrushTool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TTools_BrushTool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TTools_PaintTool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TTools_PaintTool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

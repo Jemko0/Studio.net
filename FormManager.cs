@@ -9,12 +9,16 @@ namespace StudioDotNet
         //When each form closes, close the application if no other open forms
         private void OnFormClosed(object sender, EventArgs e)
         {
+            Form form = (Form)sender;
+
+            openForms.Remove(form.Text.ToLower());
+
             if (Application.OpenForms.Count == 0)
             {
                 ExitThread();
             }
 
-            if (sender.Equals(GetForm("studio")))
+            if (sender.Equals(GetForm("studioform")))
             {
                 ExitThread();
             }
@@ -24,7 +28,7 @@ namespace StudioDotNet
 
         public void CreateMainForm()
         {
-            Form mainForm = Program.formManager.CreateForm<StudioForm>("studio");
+            Form mainForm = Program.formManager.CreateForm<StudioForm>("studioform");
             mainForm.Show();
         }
 

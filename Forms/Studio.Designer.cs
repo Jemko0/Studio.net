@@ -42,7 +42,7 @@
             this.WindowCombo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1002, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1031, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -61,7 +61,7 @@
             // timelineToolStripMenuItem
             // 
             this.timelineToolStripMenuItem.Name = "timelineToolStripMenuItem";
-            this.timelineToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.timelineToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.timelineToolStripMenuItem.Text = "Timeline";
             // 
             // StudioForm
@@ -70,7 +70,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Fuchsia;
             this.BackgroundImage = global::StudioDotNet.Properties.Resources.StdBGTransparent;
-            this.ClientSize = new System.Drawing.Size(1002, 552);
+            this.ClientSize = new System.Drawing.Size(1031, 578);
             this.Controls.Add(this.toolStrip1);
             this.Name = "StudioForm";
             this.Text = "Studio.net";

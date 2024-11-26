@@ -19,6 +19,8 @@ namespace StudioDotNet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //Run
             formManager.CreateMainForm();
             Application.Run(formManager);
             
