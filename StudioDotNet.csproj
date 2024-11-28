@@ -59,9 +59,11 @@
     <Compile Include="Forms\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
+    <Compile Include="Internal\ByteConv.cs" />
     <Compile Include="Internal\DataStructures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Saving.cs" />
     <Compile Include="StringPropertyParser.cs" />
     <Compile Include="UIColors.cs" />
     <EmbeddedResource Include="Forms\Studio.resx">

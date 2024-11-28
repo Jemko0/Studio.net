@@ -8,7 +8,7 @@ namespace StudioDotNet
 {
     public class StringPropertyParser
     {
-        private static char P_SEPERATOR = ':';
+        private static char P_SEPERATOR = ';';
         public static string MakeProperty(string pname, string pvalue)
         {
             return pname + "=" + pvalue + P_SEPERATOR;
@@ -37,6 +37,20 @@ namespace StudioDotNet
                 }
             }
             return "BAD_PROPERTY";
+        }
+
+        public static string ParseByteArray(byte[] list)
+        {
+            string s = "";
+            foreach(var i in list)
+            {
+                s += i.ToString();
+                if (list.Last<byte>() != i)
+                {
+                    s += ':';
+                }
+            }
+            return s;
         }
     }
 }

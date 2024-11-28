@@ -33,6 +33,13 @@ namespace StudioDotNet.Internal
                 public byte instrument;
                 public byte track;
                 public List<T_PatternNote> notes;
+
+                public T_Pattern(byte instrument, byte track, List<T_PatternNote> notes)
+                {
+                    this.instrument = instrument;
+                    this.track = track;
+                    this.notes = notes;
+                }
             }
 
             public struct T_PatternNote
@@ -40,6 +47,13 @@ namespace StudioDotNet.Internal
                 public float time;
                 public float length;
                 public sbyte pitch;
+
+                public T_PatternNote(float time, float length, sbyte pitch)
+                {
+                    this.time = time;
+                    this.length = length;
+                    this.pitch = pitch;
+                }
             }
 
             public struct T_TimeSignature
@@ -65,6 +79,13 @@ namespace StudioDotNet.Internal
                 x = inx;
                 y = iny;
             }
+        }
+
+        public struct ProjectFileData
+        {
+            public string fileName;
+            public string cachePath;
+            public string trackerParsed;
         }
     }
 }
