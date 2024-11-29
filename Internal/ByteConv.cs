@@ -13,6 +13,7 @@ namespace StudioDotNet.Internal
             string s = "";
             
             s += pattern.instrument;
+            s += "_";
             s += 0;
 
             foreach (DataStructures.TimelineData.T_PatternNote note in pattern.notes)
@@ -23,6 +24,16 @@ namespace StudioDotNet.Internal
             }
 
             return s;
+        }
+
+        public static DataStructures.TimelineData.T_Pattern StringToPattern(string s)
+        {
+            DataStructures.TimelineData.T_Pattern p = new DataStructures.TimelineData.T_Pattern();
+            string inst_byte = StringPropertyParser.GetPropertyValueFromPropertyList(s, "pt");
+            System.Diagnostics.Debug.WriteLine(inst_byte);
+            p.instrument = byte.Parse("0");
+
+            return p;
         }
     }
 }

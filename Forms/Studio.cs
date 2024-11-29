@@ -1,6 +1,7 @@
 ﻿using StudioDotNet.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using static StudioDotNet.Internal.DataStructures;
 
@@ -59,7 +60,11 @@ namespace StudioDotNet
                     return;
 
                 case "Open":
-                    Saving.OpenFile("unknown");
+                    OpenFileDialog fd = new OpenFileDialog();
+                    fd.ShowDialog();
+                    fd.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
+                    fd.Multiselect = false;
+                    Saving.OpenFile(fd.FileName);
                     return;
 
                 case "Save":

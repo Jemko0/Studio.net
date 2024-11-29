@@ -17,8 +17,17 @@ namespace StudioDotNet
 
         }
 
+        public static void CheckProjectsDir()
+        {
+            if (!Directory.Exists(projectSaveDir))
+            {
+                Directory.CreateDirectory(projectSaveDir);
+            }
+        }
+
         public static void SaveFile(string path)
         {
+            CheckProjectsDir();
             StudioForm s = Program.formManager.GetForm<StudioForm>("studioform");
             string fileContent = "";
             fileContent += StringPropertyParser.MakeProperty("fn", s.mainTracker.projectName);
@@ -31,26 +40,18 @@ namespace StudioDotNet
 
         public static void SaveAs()
         {
-
+            CheckProjectsDir();
         }
 
         public static bool OpenFile(string path)
         {
-            StreamReader s = new StreamReader(path);
-            List<string> l = new List<string>();
-            while(l != null)
+            if (File.Exists(path))
             {
-                l.Add(s.ReadLine());
+                StreamReader s = new StreamReader(path);
+                string fc = s.ReadToEnd();
+                s.Close();
+                Conv.StringToPattern(StringPropertyParser.GetPropertyFromPropertyList(fc, "pt"));
             }
-            s.Close();
-
-
-
-            foreach (string a in l)
-            {
-                StringPropertyParser.GetPropertyValueFromPropertyList(a, "fn");
-            }
-
             return true;
         }
     }

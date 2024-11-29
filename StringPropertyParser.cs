@@ -11,7 +11,7 @@ namespace StudioDotNet
         private static char P_SEPERATOR = ';';
         public static string MakeProperty(string pname, string pvalue)
         {
-            return pname + "=" + pvalue + P_SEPERATOR;
+            return pname + " = " + pvalue + P_SEPERATOR;
         }
 
         public static string GetPropertyValueFromPropertyList(string properties, string pname)
@@ -19,8 +19,6 @@ namespace StudioDotNet
             string str = GetPropertyFromPropertyList(properties, pname);
             str.Replace(pname, "");
             str.Replace("=", "");
-            str.Replace(":", "");
-
             return str;
         }
 
@@ -51,6 +49,38 @@ namespace StudioDotNet
                 }
             }
             return s;
+        }
+
+
+        /// <summary>
+        /// Very inefficient way of replacing chars in a string when theyre next to other ones
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        public static string ReplaceFix(string s, char ch)
+        {
+            char[] c = s.ToCharArray();
+
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i] == ch)
+                {
+                    c[i] = '\0';
+                }
+            }
+
+            string newString = "";
+
+            for (int i = 0; i < c.Length; i++)
+            {
+                if(c[i] != '\0')
+                {
+                    newString += s;
+                }
+            }
+
+            return newString;
         }
     }
 }
