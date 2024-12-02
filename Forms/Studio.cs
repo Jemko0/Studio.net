@@ -20,11 +20,10 @@ namespace StudioDotNet
                                                     new List<TimelineData.T_Pattern>(),
                                                     new TimelineData.T_TimeSignature(4, 4));
         
-        public void AddPattern()
+        public void AddPatternToTimeline(TimelineData.T_Vis_PatternPosition position)
         {
-            List<TimelineData.T_PatternNote> notes = new List<TimelineData.T_PatternNote>();
-            notes.Add(new TimelineData.T_PatternNote(310.44f, 4.0f, 24));
-            mainTracker.patterns.Add(new TimelineData.T_Pattern(0, notes));
+            mainTracker.placedPatterns.Add(new TimelineData.T_PlacedPattern(position, 0));
+            Program.formManager.GetForm<Timeline>("timeline").Refresh();
         }
 
         public void CheckUnsaved()
@@ -76,7 +75,7 @@ namespace StudioDotNet
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddPattern();
+            //AddPatternToTimeline();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace StudioDotNet.Internal
                     this.projectName = projectName;
                     this.patterns = patterns;
                     this.timeSignature = new T_TimeSignature(4, 4);
+                    this.placedPatterns = new List<T_PlacedPattern>();
                 }
 
                 public Tracker(string projectName, List<T_Pattern> patterns, T_TimeSignature timeSignature)
@@ -22,10 +23,12 @@ namespace StudioDotNet.Internal
                     this.projectName = projectName;
                     this.patterns = patterns;
                     this.timeSignature = timeSignature;
+                    this.placedPatterns = new List<T_PlacedPattern>();
                 }
 
                 public string projectName;
                 public List<T_Pattern> patterns;
+                public List<T_PlacedPattern> placedPatterns;
                 public T_TimeSignature timeSignature;
             }
 
@@ -40,7 +43,18 @@ namespace StudioDotNet.Internal
                     this.notes = notes;
                 }
             }
+            
+            public struct T_PlacedPattern
+            {
+                public T_Vis_PatternPosition position;
+                public int refPattern;
 
+                public T_PlacedPattern(T_Vis_PatternPosition pos, int refPattern)
+                {
+                    this.position = pos;
+                    this.refPattern = refPattern;
+                }
+            }
             public struct T_PatternNote
             {
                 public float time;
@@ -72,6 +86,13 @@ namespace StudioDotNet.Internal
                 public int timeSlot;
                 public int length;
                 public int track;
+
+                public T_Vis_PatternPosition(int timeSlot, int length, int track)
+                {
+                    this.timeSlot = timeSlot;
+                    this.length = length;
+                    this.track = track;
+                }
             }
         }
 

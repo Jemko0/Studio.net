@@ -41,6 +41,7 @@ namespace StudioDotNet.Internal
         {
             DataStructures.TimelineData.T_Vis_PatternPosition pt = new DataStructures.TimelineData.T_Vis_PatternPosition();
             pt.timeSlot = (int)FUtil.FSnapToGrid(m.x, 32.0f);
+            pt.track = (int)FUtil.FSnapToGrid(m.y, 48.0f);
             return pt;
         }
     }

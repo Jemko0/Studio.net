@@ -1,4 +1,5 @@
-﻿using StudioDotNet.Properties;
+﻿using StudioDotNet.Internal;
+using StudioDotNet.Properties;
 using System.Drawing;
 using System.Windows.Forms;
 using static StudioDotNet.Internal.DataStructures;
@@ -22,7 +23,7 @@ namespace StudioDotNet.Forms.Timeline
             SolidBrush b_brush = new SolidBrush(UIColors.GetColorByKey("backgrounds"));
             SolidBrush l_brush = new SolidBrush(UIColors.GetColorByKey("tl_lines"));
             SolidBrush p_brush = new SolidBrush(UIColors.GetColorByKey("pt_background"));
-
+            
             //background
             e.Graphics.FillRectangle(b_brush, new Rectangle(0, 0, ActiveForm.Width, ActiveForm.Height));
 
@@ -40,9 +41,9 @@ namespace StudioDotNet.Forms.Timeline
                 e.Graphics.FillRectangle(l_brush, new Rectangle(0, (y * zoom.y) - timelinePos.y, pictureBox1.Width, 2));
             }
 
-            foreach (T_Pattern pt in Program.formManager.GetForm<StudioForm>("studioform").mainTracker.patterns)
+            foreach (T_PlacedPattern pt in Program.formManager.GetForm<StudioForm>("studioform").mainTracker.placedPatterns)
             {
-                e.Graphics.FillRectangle(p_brush, new Rectangle(-timelinePos.x, -timelinePos.y, 200, 200));
+                e.Graphics.FillRectangle(p_brush, new RectangleF(-timelinePos.x + pt.position.timeSlot * (float)zoom.x / 16.0f, -timelinePos.y + pt.position.track * (float)zoom.y / 48.0f, (float)zoom.x / 16.0f * 64.0f, (float)zoom.y));
             }
         }
 
@@ -100,7 +101,10 @@ namespace StudioDotNet.Forms.Timeline
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            IVector2 mPos = new IVector2(e.Location);
+            TimelineData.T_Vis_PatternPosition mPos = Conv.MousePosToPattern(new IVector2(e.Location));
+            System.Diagnostics.Debug.WriteLine("pt ts = " + mPos.timeSlot);
+            System.Diagnostics.Debug.WriteLine("pt tr = " + mPos.track);
+            Program.formManager.GetForm<StudioForm>("studioform").AddPatternToTimeline(new T_Vis_PatternPosition(mPos.timeSlot, 1, mPos.track));
             System.Diagnostics.Debug.WriteLine(e.Location);
         }
     }
