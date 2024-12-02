@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,13 @@ namespace StudioDotNet.Internal
             p.instrument = byte.Parse("0");
 
             return p;
+        }
+
+        public static DataStructures.TimelineData.T_Vis_PatternPosition MousePosToPattern(DataStructures.IVector2 m)
+        {
+            DataStructures.TimelineData.T_Vis_PatternPosition pt = new DataStructures.TimelineData.T_Vis_PatternPosition();
+            pt.timeSlot = (int)FUtil.FSnapToGrid(m.x, 32.0f);
+            return pt;
         }
     }
 }

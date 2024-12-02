@@ -53,13 +53,14 @@
       <DependentUpon>Studio.cs</DependentUpon>
     </Compile>
     <Compile Include="FormManager.cs" />
-    <Compile Include="Forms\Timeline.cs">
+    <Compile Include="Forms\Timeline\Timeline.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Timeline.Designer.cs">
+    <Compile Include="Forms\Timeline\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
-    <Compile Include="Internal\ByteConv.cs" />
+    <Compile Include="Forms\Timeline\TimelineComponents.cs" />
+    <Compile Include="Internal\Conv.cs" />
     <Compile Include="Internal\DataStructures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +70,7 @@
     <EmbeddedResource Include="Forms\Studio.resx">
       <DependentUpon>Studio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Timeline.resx">
+    <EmbeddedResource Include="Forms\Timeline\Timeline.resx">
       <DependentUpon>Timeline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

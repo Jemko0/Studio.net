@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using static StudioDotNet.Internal.DataStructures;
 using static StudioDotNet.Internal.DataStructures.TimelineData;
 
-namespace StudioDotNet.Forms
+namespace StudioDotNet.Forms.Timeline
 {
     public partial class Timeline : Form
     {
@@ -21,6 +21,7 @@ namespace StudioDotNet.Forms
 
             SolidBrush b_brush = new SolidBrush(UIColors.GetColorByKey("backgrounds"));
             SolidBrush l_brush = new SolidBrush(UIColors.GetColorByKey("tl_lines"));
+            SolidBrush p_brush = new SolidBrush(UIColors.GetColorByKey("pt_background"));
 
             //background
             e.Graphics.FillRectangle(b_brush, new Rectangle(0, 0, ActiveForm.Width, ActiveForm.Height));
@@ -37,6 +38,11 @@ namespace StudioDotNet.Forms
             for(int y = 0; y < pictureBox1.Height; y++)
             {
                 e.Graphics.FillRectangle(l_brush, new Rectangle(0, (y * zoom.y) - timelinePos.y, pictureBox1.Width, 2));
+            }
+
+            foreach (T_Pattern pt in Program.formManager.GetForm<StudioForm>("studioform").mainTracker.patterns)
+            {
+                e.Graphics.FillRectangle(p_brush, new Rectangle(-timelinePos.x, -timelinePos.y, 200, 200));
             }
         }
 
@@ -90,6 +96,12 @@ namespace StudioDotNet.Forms
             }
 
             pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            IVector2 mPos = new IVector2(e.Location);
+            System.Diagnostics.Debug.WriteLine(e.Location);
         }
     }
 }

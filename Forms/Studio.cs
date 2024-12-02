@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using static StudioDotNet.Internal.DataStructures;
+using StudioDotNet.Forms.Timeline;
 
 namespace StudioDotNet
 {
@@ -23,7 +24,7 @@ namespace StudioDotNet
         {
             List<TimelineData.T_PatternNote> notes = new List<TimelineData.T_PatternNote>();
             notes.Add(new TimelineData.T_PatternNote(310.44f, 4.0f, 24));
-            mainTracker.patterns.Add(new TimelineData.T_Pattern(0, 0, notes));
+            mainTracker.patterns.Add(new TimelineData.T_Pattern(0, notes));
         }
 
         public void CheckUnsaved()

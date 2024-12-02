@@ -13,6 +13,7 @@ namespace StudioDotNet
         {
             uiColors.Add("backgrounds", Color.Gray);
             uiColors.Add("tl_lines", Color.Black);
+            uiColors.Add("pt_background", Color.Green);
         }
 
         public static void RefreshUIColors()

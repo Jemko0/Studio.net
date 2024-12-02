@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace StudioDotNet.Internal
 {
@@ -31,13 +32,11 @@ namespace StudioDotNet.Internal
             public struct T_Pattern
             {
                 public byte instrument;
-                public byte track;
                 public List<T_PatternNote> notes;
 
-                public T_Pattern(byte instrument, byte track, List<T_PatternNote> notes)
+                public T_Pattern(byte instrument, List<T_PatternNote> notes)
                 {
                     this.instrument = instrument;
-                    this.track = track;
                     this.notes = notes;
                 }
             }
@@ -67,9 +66,16 @@ namespace StudioDotNet.Internal
                     denominator = den;
                 }
             }
+
+            public struct T_Vis_PatternPosition
+            {
+                public int timeSlot;
+                public int length;
+                public int track;
+            }
         }
 
-        public struct IVector2
+        public struct IVector2 : IEquatable<IVector2>
         {
             public int x;
             public int y;
@@ -79,6 +85,22 @@ namespace StudioDotNet.Internal
                 x = inx;
                 y = iny;
             }
+
+            public IVector2(Point p)
+            {
+                x = p.X;
+                y = p.Y;
+            }
+            public bool Equals(IVector2 other)
+            {
+                return other.x == x && other.y == y;
+            }
+
+            public void Add(ref IVector2 a, ref IVector2 o)
+            {
+                a.x += o.x;
+                a.y += o.y;
+            }
         }
 
         public struct ProjectFileData
@@ -86,6 +108,19 @@ namespace StudioDotNet.Internal
             public string fileName;
             public string cachePath;
             public string trackerParsed;
+        }
+    }
+
+    public class FUtil
+    {
+        public static float FSnapToGrid(ref float f, float gridSize)
+        {
+            return (float)Math.Round((f / gridSize)) * gridSize;
+        }
+
+        public static float FSnapToGrid(float f, float gridSize)
+        {
+            return (float)Math.Round((f / gridSize)) * gridSize;
         }
     }
 }
